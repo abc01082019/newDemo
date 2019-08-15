@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190813000510_Initial.cs" />
+    <Compile Remove="Migrations\20190813000510_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190813105328_AddRemarkToPost.cs" />
+    <Compile Remove="Migrations\20190813105328_AddRemarkToPost.Designer.cs" />
+    <Compile Remove="Migrations\20190813105441_AddRemarkToPost.cs" />
+    <Compile Remove="Migrations\20190813105441_AddRemarkToPost.Designer.cs" />
+    <Compile Remove="Migrations\20190813105558_AddRemarkToPost.cs" />
+    <Compile Remove="Migrations\20190813105558_AddRemarkToPost.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlogDemo.Core\BlogDemo.Core.csproj" />
   </ItemGroup>
 
