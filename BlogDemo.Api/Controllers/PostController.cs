@@ -18,6 +18,7 @@ using BlogDemo.Infrastructure.Services;
 using System.Dynamic;
 using BlogDemo.Api.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogDemo.Api.Controllers
 {
@@ -56,6 +57,7 @@ namespace BlogDemo.Api.Controllers
             _propertyMappingContainer = propertyMappingContainer;
         }
 
+        [AllowAnonymous]
         [HttpGet(Name = "GetPosts")]
         [RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.cgzl.hateoas+json" })]
         public async Task<IActionResult> GetHateoas(PostParameters postParameters)
@@ -72,7 +74,6 @@ namespace BlogDemo.Api.Controllers
             // Test Serilog
             //_logger.LogError(string.Format("Get all posts...{0}", typeof(Post)));
             #endregion
-
             if (!_propertyMappingContainer.ValidateMappingExistsFor<PostResource, Post>(postParameters.OrderBy))
             {
                 return BadRequest("Sorting items not exists/allowed");
@@ -121,6 +122,7 @@ namespace BlogDemo.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet(Name = "GetPosts")]
         [RequestHeaderMatchingMediaType("Accept", new[] { "application/json" })]
         public async Task<IActionResult> Get(PostParameters postParameters)
@@ -164,6 +166,7 @@ namespace BlogDemo.Api.Controllers
             return Ok(postResource.ToDynamicIEnumerable(postParameters.Fields));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetPost")]
         public async Task<IActionResult> Get(int id, string fields = null)
         {

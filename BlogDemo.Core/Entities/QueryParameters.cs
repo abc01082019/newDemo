@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BlogDemo.Core.Entities
 {
-    public class QueryParameters : INotifyPropertyChanged
+    public abstract class QueryParameters : INotifyPropertyChanged
     {
         private const int DefaultPageSize = 10;
         private const int DefaultMaxPageSize = 100;
