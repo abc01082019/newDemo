@@ -27,6 +27,9 @@ namespace BlogDemo.Api.Extensions
 
             CreateMap<Post, PostUpdateResource>();
             CreateMap<PostUpdateResource, Post>();
+
+            CreateMap<PostImage, PostImageResource>();
+            CreateMap<PostImageResource, PostImage>();
         }
     }
 }

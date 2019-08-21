@@ -6,14 +6,14 @@ const PROXY_CONFIG = [
         target: "http://localhost:6000",
         secure: false
     }
-    //,
-    // {
-    //     context: [
-    //         "/test"
-    //     ],
-    //     target: "https://localhost:1111",
-    //     secure: true
-    // }
+    ,
+    {
+        context: [
+            "/uploads"
+        ],
+        target: "http://localhost:6000",
+        secure: false
+    }
 ];
 
 module.exports = PROXY_CONFIG;

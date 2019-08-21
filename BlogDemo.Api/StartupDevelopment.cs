@@ -98,6 +98,7 @@ namespace BlogDemo.Api
 
             // 接口和实体类对接
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostImageRepository, PostImageRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));
@@ -105,6 +106,7 @@ namespace BlogDemo.Api
             // 验证类和实体类对接
             services.AddTransient<IValidator<PostAddResource>, PostAddOrUpdateResourceValidator<PostAddResource>>();
             services.AddTransient<IValidator<PostUpdateResource>, PostAddOrUpdateResourceValidator<PostUpdateResource>>();
+            services.AddTransient<IValidator<PostImageResource>, PostImageResourceValidator>();
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
@@ -113,7 +115,7 @@ namespace BlogDemo.Api
                 return new UrlHelper(actionContext);
             });
 
-            // 排序
+            // 排序时会用到的配置
             var propertyMappingContainer = new PropertyMappingContainer();
             propertyMappingContainer.Register<PostPropertyMapping>();
             services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
@@ -154,13 +156,10 @@ namespace BlogDemo.Api
         {
             //app.UseDeveloperExceptionPage();    // 错误是返回一个页面, 对Mvc开发者有用
             app.UseMyExceptionHandler(loggerFactory);
-            
             app.UseCors("AllowAngularDevOrigin");
-
             app.UseHttpsRedirection();  // 在Mvc之前启动强制使用Https服务
-
+            app.UseStaticFiles();
             app.UseAuthentication();
-
             app.UseMvc();
         }
     }

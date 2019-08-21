@@ -8,8 +8,7 @@ using System.Text;
 namespace BlogDemo.Infrastructure.Database.EntityConfigurations
 {
     /// <summary>
-    /// Set validations/constrains for the data-resources 
-    /// Use Fluentvalidation instead of (see "PostResourceValidator.cs")
+    /// Set validations/constrains for the data-resources/domain model
     /// </summary>
     public class PostConfiguration: IEntityTypeConfiguration<Post>
     {
