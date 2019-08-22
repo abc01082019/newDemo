@@ -1,11 +1,11 @@
 <mat-card class="post-card">
     <mat-card-header class="post-card-header">
         <div mat-card-avatar>
-            <img class="avatar" [src]="'/assets/baseline-account_circle-24px.svg'">
+            <img class="avatar" [src]="'/avatars/' + post.author + '.jpg'" [alt]="'/avatars/' + post.author + '.jpg'" onerror="if (this.src != '/assets/baseline-account_circle-24px.svg') this.src = '/assets/baseline-account_circle-24px.svg';">
         </div>
-        <mat-card-title>
+        <mat-card-title [routerLink]="['/blog/post-detail', post.id]">
             <b>{{post.title}}</b>
-        </mat-card-title>
+          </mat-card-title>
         <mat-card-subtitle>{{post.updateTime | date: 'medium'}} by {{post.author}}</mat-card-subtitle>
     </mat-card-header>
 

@@ -19,6 +19,7 @@ using System.Dynamic;
 using BlogDemo.Api.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Authorization;
+using IdentityModel;
 
 namespace BlogDemo.Api.Controllers
 {
@@ -210,7 +211,8 @@ namespace BlogDemo.Api.Controllers
 
             var newPost = _mapper.Map<PostAddResource, Post>(postAddResource);
 
-            newPost.Author = "Post Test";
+            var username = User.Claims.FirstOrDefault(x => x.Type == JwtClaimTypes.PreferredUserName)?.Value;
+            newPost.Author = username;
             newPost.LastModified = DateTime.Now;
 
             _postRepository.AddPost(newPost);

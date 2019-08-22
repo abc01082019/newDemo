@@ -5,6 +5,7 @@ import { TinymceService } from '../../services/tinymce.service';
 import { PostService } from '../../services/post.service';
 import { MatSnackBar } from '@angular/material';
 import { post } from 'selenium-webdriver/http';
+import { ValidationErrorHandler } from 'src/app/shared/validation-error-handler';
 
 @Component({
   selector: 'app-write-post',
@@ -27,8 +28,8 @@ export class WritePostComponent implements OnInit {
 
   ngOnInit() {
     this.postForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]],
-      body: ['', [Validators.required, Validators.minLength(100)]]
+      title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      body: ['', [Validators.required, Validators.minLength(1)]]
     });
 
     this.editorSettings = this.tinymce.getSettings();
@@ -42,6 +43,7 @@ export class WritePostComponent implements OnInit {
         },
         validationResult => {
           this.snackBar.open('An error ocurred: validation error', 'Close', { duration: 3000 });
+          ValidationErrorHandler.handleFormValidationErrors(this.postForm, validationResult);
         }
       );
     }

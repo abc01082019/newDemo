@@ -10,6 +10,8 @@ import { RequireAuthenticatedUserRouteGuard } from './shared/oidc/require-authen
 import { RedirectSilentRenewComponent } from './shared/oidc/redirect-silent-renew/redirect-silent-renew.component';
 import { SigninOidcComponent } from './shared/oidc/signin-oidc/signin-oidc.component';
 import { OpenIdConnectService } from './shared/oidc/open-id-connect.service';
+import { GlobalErrorHandler } from './shared/global-error-handler';
+import { ErrorLoggerService } from './shared/error-logger.service';
 
 const routes: Routes = [
   // routing to the blog/blog.module.ts file's BlogModule module
@@ -35,7 +37,9 @@ const routes: Routes = [
   ],
   providers: [
     OpenIdConnectService,
-    RequireAuthenticatedUserRouteGuard
+    RequireAuthenticatedUserRouteGuard,
+    GlobalErrorHandler,
+    ErrorLoggerService
   ],
   bootstrap: [AppComponent]
 })

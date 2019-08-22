@@ -15,6 +15,12 @@ import { WritePostComponent } from './components/write-post/write-post.component
 import { TinymceService } from './services/tinymce.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { EnsureAcceptHeaderInterceptor } from '../shared/ensure-accept-header-interceptor';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { SafeHtmlPipe } from '../shared/safe-html.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PostTableComponent } from './components/post-table/post-table.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,12 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ToolbarComponent, 
     PostListComponent, 
     PostCardComponent, 
-    WritePostComponent
+    WritePostComponent,
+    EditPostComponent,
+    PostDetailComponent,
+    PostTableComponent,
+    SafeHtmlPipe,
+    PostTableComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +43,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    InfiniteScrollModule
   ],
   providers: [
     PostService,
@@ -40,6 +52,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: EnsureAcceptHeaderInterceptor,
       multi: true
     }
   ]

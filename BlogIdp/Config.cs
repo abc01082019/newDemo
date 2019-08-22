@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
@@ -24,7 +25,12 @@ namespace BlogIdp
         {
             return new ApiResource[]
             {
-                new ApiResource("restApi", "My RESTful API #1")
+                new ApiResource("restApi", "My RESTful API #1", new List<string>{
+                    "name",
+                    "gender",
+                    JwtClaimTypes.PreferredUserName,
+                    JwtClaimTypes.Picture
+                })
             };
         }
 
